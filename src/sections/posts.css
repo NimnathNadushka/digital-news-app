@@ -1,3 +1,29 @@
+/*--------------------------------------------------------------
+# Posts Section
+--------------------------------------------------------------*/
+.posts {
+  padding: 40px 0;
+}
+
+.posts .container {
+  max-width: 1200px;
+}
+
+.custom-border {
+  border-left: 1px solid rgba(var(--color-black-rgb), 0.1) !important;
+  padding-left: 20px;
+}
+
+@media (max-width: 991px) {
+  .custom-border {
+    border-left: none !important;
+    padding-left: 0;
+    border-top: 1px solid rgba(var(--color-black-rgb), 0.1) !important;
+    padding-top: 20px;
+    margin-top: 20px;
+  }
+}
+
 @media (max-width: 768px) {
   .custom-border {
     border: none !important;

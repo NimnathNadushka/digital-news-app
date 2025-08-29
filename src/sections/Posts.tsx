@@ -2,14 +2,14 @@
 
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import PostItemOne from '../components/PostItemOne'; // This import should be correct
+import PostItemOne from '../components/PostItemOne';
 import './posts.css';
 
 export default function Posts() {
   const router = useRouter();
   const [items, setItems] = useState<any[]>([]);
 
-  const getItemsData = ()=>{
+  const getItemsData = () => {
     fetch('/api/postitems')
       .then(res => res.json())
       .then(data => setItems(data))
@@ -18,6 +18,7 @@ export default function Posts() {
 
   useEffect(() => {
     getItemsData();
+    getSinglePostData('68af2dd4b031f55cef6b6033');
   }, []);
 
   return (
