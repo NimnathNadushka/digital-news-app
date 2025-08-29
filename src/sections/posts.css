@@ -14,6 +14,7 @@
   padding-left: 20px;
 }
 
+/* Mobile adjustments for posts grid */
 @media (max-width: 991px) {
   .custom-border {
     border-left: none !important;
@@ -22,11 +23,67 @@
     padding-top: 20px;
     margin-top: 20px;
   }
+  
+  .posts .row.g-5 {
+    --bs-gutter-x: 1rem;
+    --bs-gutter-y: 1.5rem;
+  }
+  
+  .posts .container {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
 }
 
 @media (max-width: 768px) {
   .custom-border {
     border: none !important;
+    padding-top: 15px;
+    margin-top: 15px;
+  }
+  
+  .posts {
+    padding: 20px 0;
+  }
+  
+  .posts .row.g-5 {
+    --bs-gutter-x: 0.75rem;
+    --bs-gutter-y: 1rem;
+  }
+  
+  /* Stack all columns vertically on mobile */
+  .posts .col-lg-4,
+  .posts .col-lg-5,
+  .posts .col-lg-3,
+  .posts .col-lg-6 {
+    width: 100%;
+    max-width: 100%;
+    flex: 0 0 100%;
+  }
+  
+  /* Ensure nested rows also stack properly */
+  .posts .row .col-lg-6 {
+    margin-bottom: 1rem;
+  }
+  
+  .posts .row .col-lg-6:last-child {
+    margin-bottom: 0;
+  }
+}
+
+@media (max-width: 576px) {
+  .posts .container {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+  
+  .posts .row.g-5 {
+    --bs-gutter-x: 0.5rem;
+    --bs-gutter-y: 0.75rem;
+  }
+  
+  .posts {
+    padding: 15px 0;
   }
 }
 
@@ -125,6 +182,7 @@
   color: var(--color-links-hover);
 }
 
+/* Mobile responsiveness for trending section */
 @media (max-width: 991px) {
   .trending-section {
     margin-top: 30px;
@@ -134,10 +192,68 @@
 @media (max-width: 768px) {
   .trending-section {
     padding: 20px 15px;
+    margin-top: 20px;
   }
   
   .trending-title {
     font-size: 20px;
     margin-bottom: 20px;
+  }
+  
+  .trending-posts {
+    gap: 15px;
+  }
+  
+  .trending-item {
+    gap: 12px;
+    padding-bottom: 15px;
+  }
+  
+  .trending-number {
+    width: 22px;
+    height: 22px;
+    font-size: 11px;
+  }
+  
+  .trending-post-title {
+    font-size: 13px;
+  }
+  
+  .trending-meta {
+    gap: 6px;
+    margin-bottom: 6px;
+  }
+}
+
+@media (max-width: 576px) {
+  .trending-section {
+    padding: 15px 10px;
+    margin-top: 15px;
+  }
+  
+  .trending-title {
+    font-size: 18px;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+  }
+  
+  .trending-posts {
+    gap: 12px;
+  }
+  
+  .trending-item {
+    gap: 10px;
+    padding-bottom: 12px;
+  }
+  
+  .trending-number {
+    width: 20px;
+    height: 20px;
+    font-size: 10px;
+  }
+  
+  .trending-post-title {
+    font-size: 12px;
+    line-height: 1.4;
   }
 }
