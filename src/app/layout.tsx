@@ -1,6 +1,6 @@
 import 'bootstrap-icons/font/bootstrap-icons.css'; //import bootsrap icons
-
 import 'bootstrap/dist/css/bootstrap.css'; // import bootstrap css
+import '@/components/preloader.css'; // import preloader css
 
 
 
