@@ -25,7 +25,10 @@ export async function POST(request: Request) {
         const contentType = request.headers.get('content-type');
         if (!contentType || !contentType.includes('application/json')) {
             return new Response(
-                JSON.stringify({ message: "Content-Type must be application/json" }), 
+                JSON.stringify({ 
+                    message: "Content-Type must be application/json",
+                    received: contentType 
+                }), 
                 { 
                     status: 400,
                     headers: { 'Content-Type': 'application/json' }
@@ -49,9 +52,13 @@ export async function POST(request: Request) {
         let postitem;
         try {
             postitem = JSON.parse(body);
+            console.log("Received post item data:", postitem); // Debug log
         } catch (parseError) {
             return new Response(
-                JSON.stringify({ message: "Invalid JSON format" }), 
+                JSON.stringify({ 
+                    message: "Invalid JSON format",
+                    error: (parseError as Error).message
+                }), 
                 { 
                     status: 400,
                     headers: { 'Content-Type': 'application/json' }
@@ -62,7 +69,14 @@ export async function POST(request: Request) {
         // Validate required fields
         if (!postitem.title || !postitem.img || !postitem.category) {
             return new Response(
-                JSON.stringify({ message: "Missing required fields: title, img, category" }), 
+                JSON.stringify({ 
+                    message: "Missing required fields: title, img, category",
+                    received: {
+                        title: postitem.title || null,
+                        img: postitem.img || null,
+                        category: postitem.category || null
+                    }
+                }), 
                 { 
                     status: 400,
                     headers: { 'Content-Type': 'application/json' }
@@ -70,17 +84,35 @@ export async function POST(request: Request) {
             );
         }
 
-        const savedItem = await new PostItem({ ...postitem }).save();
-        return new Response(JSON.stringify(savedItem), {
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            status: 201,
-        });
+        try {
+            const savedItem = await new PostItem({ ...postitem }).save();
+            console.log("Saved item:", savedItem); // Debug log
+            return new Response(JSON.stringify(savedItem), {
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                status: 201,
+            });
+        } catch (dbError) {
+            console.error("Database error:", dbError);
+            return new Response(
+                JSON.stringify({ 
+                    message: "Database error", 
+                    error: (dbError as Error).message 
+                }), 
+                { 
+                    status: 500,
+                    headers: { 'Content-Type': 'application/json' }
+                }
+            );
+        }
     } catch (error) {
         console.error('Error creating post item:', error);
         return new Response(
-            JSON.stringify({ message: "Server error" }), 
+            JSON.stringify({ 
+                message: "Server error",
+                error: (error as Error).message 
+            }), 
             { 
                 status: 500,
                 headers: { 'Content-Type': 'application/json' }
