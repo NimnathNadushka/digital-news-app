@@ -1,0 +1,544 @@
+/* About Page Specific Styles - Enhanced version with improved colors and sizing */
+
+/* Global styles for the about page */
+.badge-primary {
+  display: inline-block;
+  background-color: rgba(var(--color-primary-rgb), 0.1);
+  color: var(--color-primary);
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 0.4rem 1rem;
+  border-radius: 50px;
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* About Intro Section - Enhanced with lighter, more modern colors */
+.about-intro {
+  /* Updated to a lighter, more modern color scheme */
+  background: linear-gradient(135deg, #f0f7ff 0%, #e6f0fb 100%);
+  padding: 100px 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.about-intro::before {
+  content: "";
+  position: absolute;
+  top: -100px;
+  right: -100px;
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  background: rgba(67, 97, 238, 0.06); /* Subtle blue accent */
+  z-index: 0;
+}
+
+.about-intro::after {
+  content: "";
+  position: absolute;
+  bottom: -100px;
+  left: -100px;
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  background: rgba(67, 97, 238, 0.06); /* Subtle blue accent */
+  z-index: 0;
+}
+
+.page-title {
+  font-size: 3.5rem;
+  font-weight: 800;
+  margin-bottom: 1.5rem;
+  color: var(--color-black);
+  position: relative;
+  z-index: 1;
+}
+
+.intro-text {
+  max-width: 800px;
+  margin: 0 auto;
+  font-size: 1.2rem;
+  line-height: 1.8;
+  color: var(--color-default);
+  position: relative;
+  z-index: 1;
+}
+
+/* Company History Section with Timeline */
+.history-timeline {
+  position: relative;
+  padding-left: 30px;
+  border-left: 2px solid var(--color-primary);
+}
+
+.timeline-dot {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background-color: var(--color-primary);
+  border-radius: 50%;
+  left: -11px;
+  top: 0;
+}
+
+.timeline-year {
+  display: inline-block;
+  background-color: var(--color-primary);
+  color: white;
+  padding: 4px 12px;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+/* Section Headers - Enhanced */
+.section-header {
+  position: relative;
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--color-black);
+  margin-bottom: 1.5rem;
+}
+
+.team-subtitle {
+  max-width: 600px;
+  margin: 0 auto;
+  color: var(--color-gray);
+  margin-bottom: 2rem; /* Added more space before team grid */
+}
+
+/* Mission & Vision Boxes - Enhanced */
+.mission-box, .vision-box {
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(var(--color-black-rgb), 0.05);
+  transition: all 0.3s ease;
+  padding: 2.5rem;
+  position: relative;
+  overflow: hidden;
+  border-bottom: 4px solid transparent;
+}
+
+.mission-box {
+  border-bottom-color: #4361ee;
+}
+
+.vision-box {
+  border-bottom-color: #3a0ca3;
+}
+
+.mission-box:hover, .vision-box:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 15px 35px rgba(var(--color-black-rgb), 0.1);
+}
+
+.icon-box {
+  margin-bottom: 1.5rem;
+}
+
+.icon-box i {
+  font-size: 2.5rem;
+  color: var(--color-primary);
+}
+
+.mission-box h2, .vision-box h2 {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--color-black);
+  margin-bottom: 1rem;
+}
+
+.mission-box p, .vision-box p {
+  font-size: 1.05rem;
+  line-height: 1.7;
+}
+
+/* Team Cards - Modernized with circular images */
+.our-team {
+  background-color: #f9fafc; /* Light background for team section */
+  padding-top: 70px;
+  padding-bottom: 70px;
+}
+
+.team-card {
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(var(--color-black-rgb), 0.05);
+  background-color: white;
+  transition: all 0.3s ease;
+  text-align: center; /* Center content for modern look */
+  padding: 2rem 1.5rem; /* Add padding all around */
+  height: 100%;
+}
+
+.team-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 15px 35px rgba(var(--color-black-rgb), 0.1);
+}
+
+.team-image-container {
+  position: relative;
+  overflow: hidden;
+  height: 180px; /* Reduced height for circular images */
+  width: 180px; /* Make it square before circular */
+  border-radius: 50%; /* Make images circular */
+  margin: 0 auto 1.5rem; /* Center horizontally with margin below */
+  border: 5px solid rgba(var(--color-primary-rgb), 0.05); /* Subtle border */
+}
+
+.team-image-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.team-card:hover .team-image-container img {
+  transform: scale(1.08);
+}
+
+.team-social {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 1.2rem;
+}
+
+.team-social a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(var(--color-primary-rgb), 0.1);
+  color: var(--color-primary);
+  transition: all 0.3s ease;
+}
+
+.team-social a:hover {
+  background: var(--color-primary);
+  color: white;
+}
+
+.team-content {
+  padding: 0; /* Remove padding as it's on the card now */
+}
+
+.team-name {
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin-bottom: 5px;
+  color: var(--color-black);
+}
+
+.team-role {
+  font-size: 0.9rem;
+  margin-bottom: 15px;
+  color: var(--color-primary);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.team-bio {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: var(--color-gray);
+}
+
+/* Latest News Cards - Enhanced */
+.view-all-link {
+  color: var(--color-primary);
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.3s ease;
+}
+
+.view-all-link:hover {
+  color: var(--color-primary-darker);
+  gap: 12px;
+}
+
+.news-card {
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(var(--color-black-rgb), 0.05);
+  background-color: white;
+  transition: all 0.3s ease;
+}
+
+.news-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 15px 35px rgba(var(--color-black-rgb), 0.1);
+}
+
+.news-image-container {
+  position: relative;
+  overflow: hidden;
+}
+
+.news-image-container img {
+  width: 100%;
+  height: 240px;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.news-card:hover .news-image-container img {
+  transform: scale(1.08);
+}
+
+.news-category {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  background: var(--color-primary);
+  color: white;
+  padding: 5px 12px;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.news-content {
+  padding: 1.8rem;
+}
+
+.news-meta {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.news-date {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.85rem;
+  color: var(--color-gray);
+}
+
+.news-card h3 {
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin-bottom: 0.8rem;
+  line-height: 1.4;
+  color: var(--color-black);
+}
+
+.news-card p {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: var(--color-gray);
+  margin-bottom: 1.2rem;
+}
+
+.read-more {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--color-primary);
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+}
+
+.read-more:hover {
+  gap: 12px;
+  color: var(--color-primary-darker);
+}
+
+/* Newsletter Section - Updated to match hero section colors */
+.newsletter-section {
+  background-color: #f9fafc; /* Subtle background to separate from other sections */
+  padding: 50px 0;
+}
+
+.newsletter-container {
+  background: linear-gradient(135deg, #f0f7ff 0%, #e6f0fb 100%); /* Matching hero section gradient */
+  border-radius: 12px;
+  padding: 3rem;
+  color: var(--color-default); /* Dark text for contrast */
+  box-shadow: 0 10px 30px rgba(var(--color-black-rgb), 0.05);
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(67, 97, 238, 0.1); /* Subtle border to define the container */
+}
+
+.newsletter-container::before {
+  content: '';
+  position: absolute;
+  top: -50px;
+  right: -50px;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  background: rgba(67, 97, 238, 0.06); /* Matching hero section accent */
+  z-index: 0;
+}
+
+.newsletter-icon {
+  color: var(--color-primary); /* Dark icon color */
+  font-size: 2.5rem;
+}
+
+.newsletter-container h2 {
+  font-size: 2.2rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  position: relative;
+  z-index: 1;
+  color: var(--color-black);
+}
+
+.newsletter-container p {
+  font-size: 1.1rem;
+  color: var(--color-gray);
+  margin-bottom: 0;
+  position: relative;
+  z-index: 1;
+}
+
+.newsletter-form {
+  position: relative;
+  z-index: 1;
+}
+
+.newsletter-form .form-control {
+  height: 56px;
+  border: 1px solid rgba(67, 97, 238, 0.2);
+  border-radius: 50px 0 0 50px;
+  padding-left: 25px;
+  font-size: 1rem;
+  background-color: white;
+}
+
+.newsletter-form .form-control:focus {
+  border-color: rgba(67, 97, 238, 0.5);
+  box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.1);
+}
+
+.newsletter-form .btn {
+  border-radius: 0 50px 50px 0;
+  height: 56px;
+  padding: 0 30px;
+  background-color: var(--color-primary);
+  border-color: var(--color-primary);
+  font-weight: 600;
+  font-size: 1rem;
+  color: white;
+}
+
+.newsletter-form .btn:hover {
+  background-color: #4361ee; /* Brighter blue on hover */
+  border-color: #4361ee;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 991px) {
+  .page-title {
+    font-size: 2.8rem;
+  }
+  
+  .section-header {
+    font-size: 2.2rem;
+  }
+  
+  .team-image-container {
+    height: 160px;
+    width: 160px;
+  }
+  
+  .newsletter-container {
+    padding: 2.5rem;
+  }
+  
+  .newsletter-container h2 {
+    font-size: 1.8rem;
+  }
+}
+
+@media (max-width: 767px) {
+  .about-intro {
+    padding: 70px 0;
+  }
+  
+  .page-title {
+    font-size: 2.2rem;
+  }
+  
+  .section-header {
+    font-size: 1.8rem;
+  }
+  
+  .mission-box, .vision-box {
+    padding: 1.8rem;
+    margin-bottom: 20px;
+  }
+  
+  .team-card {
+    margin-bottom: 20px;
+    padding: 1.5rem 1rem;
+  }
+  
+  .team-image-container {
+    height: 140px;
+    width: 140px;
+  }
+  
+  .newsletter-form {
+    margin-top: 1.5rem;
+  }
+  
+  .newsletter-container {
+    padding: 2rem;
+    text-align: center;
+  }
+  
+  .newsletter-icon {
+    margin-bottom: 1rem;
+  }
+}
+
+@media (max-width: 575px) {
+  .about-intro {
+    padding: 50px 0;
+  }
+  
+  .page-title {
+    font-size: 1.8rem;
+  }
+  
+  .intro-text {
+    font-size: 1rem;
+  }
+  
+  .team-image-container {
+    height: 120px;
+    width: 120px;
+  }
+  
+  .team-card {
+    padding: 1.2rem 0.8rem;
+  }
+  
+  .team-content, .news-content {
+    padding: 0;
+  }
+  
+  .newsletter-container {
+    padding: 1.5rem;
+  }
+  
+  .newsletter-form .form-control,
+  .newsletter-form .btn {
+    height: 48px;
+  }
+}
