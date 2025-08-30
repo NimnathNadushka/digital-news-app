@@ -1,15 +1,13 @@
 import 'bootstrap-icons/font/bootstrap-icons.css'; //import bootsrap icons
-
 import 'bootstrap/dist/css/bootstrap.css'; // import bootstrap css
-
-
+import '@/components/preloader.css'; // import preloader css
 
 import type { Metadata } from "next";
 import { EB_Garamond } from "next/font/google";
 import "./variables.css";
 import "./globals.css";
 import Header from '@/components/Header';
-
+import Footer from '@/components/Footer';
 
 const ebGaramond = EB_Garamond({
   variable: "--font-geist-sans",
@@ -36,6 +34,7 @@ export default function RootLayout({
       <body className={`${ebGaramond.variable} ${ebGaramond1.variable}`}>
         <Header />
         {children}
+        <Footer />
       </body>
     </html>
   );
