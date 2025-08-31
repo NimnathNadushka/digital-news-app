@@ -1,6 +1,6 @@
 import React from 'react';
-import Image from 'next/image';
 import Link from 'next/link';
+import Image from 'next/image';
 import './about.css';
 
 export default function AboutPage() {
@@ -89,7 +89,7 @@ export default function AboutPage() {
                 <div className="timeline-content">
                   <span className="timeline-year">Est. 2018</span>
                   <h2 className="section-header">Our Journey</h2>
-                  <p>Founded in 2018, Digital News began as a small local newsroom and quickly expanded into a national digital publication. We've focused on quality reporting and audience-first storytelling since day one.</p>
+                  <p>Founded in 2018, Digital News began as a small local newsroom and quickly expanded into a national digital publication. We&apos;ve focused on quality reporting and audience-first storytelling since day one.</p>
                 </div>
               </div>
             </div>
@@ -138,9 +138,11 @@ export default function AboutPage() {
               <div key={index} className="col-lg-4 col-md-6">
                 <div className="team-card h-100">
                   <div className="team-image-container">
-                    <img 
+                    <Image 
                       src={member.image} 
                       alt={`Photo of ${member.name} — ${member.role}`} 
+                      width={300}
+                      height={300}
                       className="img-fluid" 
                       loading="lazy"
                     />
@@ -180,9 +182,11 @@ export default function AboutPage() {
               <div key={index} className="col-md-6">
                 <div className="news-card h-100">
                   <div className="news-image-container">
-                    <img 
+                    <Image 
                       src={news.image} 
                       alt={news.title} 
+                      width={400}
+                      height={240}
                       className="img-fluid" 
                       loading="lazy"
                     />

@@ -1,26 +1,34 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import Link from 'next/link';
+import Image from 'next/image';
 import Preloader from '@/components/Preloader';
 import '../postitems.css';
 import './singlepost.css';
 
+interface PostItem {
+  _id: string;
+  img: string;
+  category: string;
+  date: string;
+  title: string;
+  brief: string;
+  avatar: string;
+  author: string;
+  top?: boolean;
+  trending?: boolean;
+}
+
 export default function SinglePostPage() {
   const params = useParams();
   const router = useRouter();
-  const [post, setPost] = useState<any>(null);
-  const [relatedPosts, setRelatedPosts] = useState<any[]>([]);
+  const [post, setPost] = useState<PostItem | null>(null);
+  const [relatedPosts, setRelatedPosts] = useState<PostItem[]>([]);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    if (params.id) {
-      fetchPost(params.id as string);
-    }
-  }, [params.id]);
-
-  const fetchPost = async (id: string) => {
+  const fetchPost = useCallback(async (id: string) => {
     try {
       setLoading(true);
       const response = await fetch(`/api/postitems/${id}`);
@@ -41,7 +49,7 @@ export default function SinglePostPage() {
     } catch (error) {
       console.error('Error fetching post:', error);
     }
-  };
+  }, [router]);
 
   const fetchRelatedPosts = async (category: string, currentId: string) => {
     try {
@@ -50,7 +58,7 @@ export default function SinglePostPage() {
         const data = await response.json();
         // Filter posts by same category and exclude current post
         const related = data
-          .filter((p: any) => p.category === category && p._id !== currentId)
+          .filter((p: PostItem) => p.category === category && p._id !== currentId)
           .slice(0, 3); // Limit to 3 related posts
         setRelatedPosts(related);
       }
@@ -60,6 +68,12 @@ export default function SinglePostPage() {
       setLoading(false);
     }
   };
+
+  useEffect(() => {
+    if (params.id) {
+      fetchPost(params.id as string);
+    }
+  }, [params.id, fetchPost]);
 
   // Format date
   const formatDate = (dateString: string) => {
@@ -110,7 +124,14 @@ export default function SinglePostPage() {
                   {/* Left column - Featured Image */}
                   <div className="col-lg-6">
                     <div className="featured-image">
-                      <img src={`/${post.img}`} alt={post.title} className="img-fluid" />
+                      <Image 
+                        src={`/${post.img}`} 
+                        alt={post.title} 
+                        width={600}
+                        height={400}
+                        className="img-fluid"
+                        priority
+                      />
                       {post.top && <span className="featured-badge">Featured</span>}
                       {post.trending && <span className="trending-badge">Trending</span>}
                     </div>
@@ -123,14 +144,19 @@ export default function SinglePostPage() {
                       <div className="author-info">
                         {post.avatar && (
                           <div className="author-image">
-                            <img src={`/${post.avatar}`} alt={post.author || 'Author'} />
+                            <Image 
+                              src={`/${post.avatar}`} 
+                              alt={post.author || 'Author'} 
+                              width={40}
+                              height={40}
+                            />
                           </div>
                         )}
                         <div className="author-name">
                           <p>{post.author || 'Digital News Team'}</p>
                         </div>
                       </div>
-                      
+
                       {/* First paragraph of content */}
                       <div className="article-excerpt">
                         {paragraphs.length > 0 && <p>{paragraphs[0]}</p>}
@@ -192,9 +218,11 @@ export default function SinglePostPage() {
                       <div className="post-card h-100">
                         <div className="post-image">
                           <Link href={`/postitems/${relatedPost._id}`}>
-                            <img 
+                            <Image 
                               src={`/${relatedPost.img}`} 
                               alt={relatedPost.title} 
+                              width={400}
+                              height={250}
                               className="img-fluid" 
                             />
                           </Link>

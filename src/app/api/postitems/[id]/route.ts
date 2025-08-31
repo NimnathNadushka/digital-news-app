@@ -4,7 +4,7 @@ import PostItem from "../../../../../models/PostItems";
 dbconnect();
 
 export async function GET(_request: Request, { params }: { params: Promise<{ id: string }> }) {
-  const { id } = await params; // Await params before accessing properties
+  const { id } = await params;
 
   try {
     const postitem = await PostItem.findById(id).select('-__v');
@@ -29,40 +29,16 @@ export async function GET(_request: Request, { params }: { params: Promise<{ id:
   }
 }
 
-// ADD PUT METHOD FOR UPDATING POSTS
 export async function PUT(request: Request, { params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
 
   try {
-    // Check if request has content-type header
-    const contentType = request.headers.get('content-type');
-    if (!contentType || !contentType.includes('application/json')) {
-      return new Response(
-        JSON.stringify({ message: "Content-Type must be application/json" }), 
-        { 
-          status: 400,
-          headers: { 'Content-Type': 'application/json' }
-        }
-      );
-    }
-
-    // Get the request body
-    const body = await request.text();
-    if (!body || body.trim() === '') {
-      return new Response(
-        JSON.stringify({ message: "Request body cannot be empty" }), 
-        { 
-          status: 400,
-          headers: { 'Content-Type': 'application/json' }
-        }
-      );
-    }
-
-    // Parse JSON
     let updates;
+    
     try {
-      updates = JSON.parse(body);
-    } catch (parseError) {
+      updates = await request.json();
+    } catch (error) {
+      console.error('JSON parse error:', error);
       return new Response(
         JSON.stringify({ message: "Invalid JSON format" }), 
         { 
@@ -72,7 +48,6 @@ export async function PUT(request: Request, { params }: { params: Promise<{ id: 
       );
     }
 
-    // Validate required fields
     if (!updates.title || !updates.category) {
       return new Response(
         JSON.stringify({ message: "Missing required fields: title, category" }), 
@@ -83,7 +58,6 @@ export async function PUT(request: Request, { params }: { params: Promise<{ id: 
       );
     }
 
-    // Find and update the post
     const updatedPost = await PostItem.findByIdAndUpdate(
       id,
       { $set: updates },
@@ -113,7 +87,6 @@ export async function PUT(request: Request, { params }: { params: Promise<{ id: 
   }
 }
 
-// ADD DELETE METHOD FOR DELETING POSTS
 export async function DELETE(_request: Request, { params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
 
@@ -129,14 +102,8 @@ export async function DELETE(_request: Request, { params }: { params: Promise<{ 
         }
       );
     }
-    
-    return new Response(
-      JSON.stringify({ message: "Post deleted successfully" }), 
-      { 
-        status: 200,
-        headers: { 'Content-Type': 'application/json' }
-      }
-    );
+
+    return Response.json({ message: "Post deleted successfully" });
   } catch (error) {
     console.error('Error deleting post item:', error);
     return new Response(

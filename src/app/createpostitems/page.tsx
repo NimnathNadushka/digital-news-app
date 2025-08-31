@@ -3,7 +3,32 @@
 import React, { useState, useEffect } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
+import Image from 'next/image';
 import './createpost.css';
+
+interface PostItem {
+  _id: string;
+  title: string;
+  category: string;
+  brief: string;
+  author: string;
+  avatar: string;
+  top: boolean;
+  trending: boolean;
+  img: string;
+  date: string;
+}
+
+interface FormData {
+  title: string;
+  category: string;
+  brief: string;
+  author: string;
+  avatar: string;
+  top: boolean;
+  trending: boolean;
+  img: string;
+}
 
 export default function CreatePostPage() {
   const router = useRouter();
@@ -12,12 +37,12 @@ export default function CreatePostPage() {
   const [isEdit, setIsEdit] = useState(false);
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState({ type: '', text: '' });
-  const [posts, setPosts] = useState([]);
+  const [posts, setPosts] = useState<PostItem[]>([]);
   const [previewImage, setPreviewImage] = useState('');
   const [imageFile, setImageFile] = useState<File | null>(null);
 
   // Form state
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<FormData>({
     title: '',
     category: '',
     brief: '',
@@ -29,21 +54,6 @@ export default function CreatePostPage() {
   });
 
   // Fetch all posts for the management section
-  useEffect(() => {
-    fetchPosts();
-  }, []);
-
-  // If we're editing, fetch the post data
-  useEffect(() => {
-    if (editId) {
-      setIsEdit(true);
-      fetchPostForEdit(editId);
-    } else {
-      setIsEdit(false);
-      resetForm();
-    }
-  }, [editId]);
-
   const fetchPosts = async () => {
     try {
       const response = await fetch('/api/postitems');
@@ -89,6 +99,21 @@ export default function CreatePostPage() {
       setLoading(false);
     }
   };
+
+  useEffect(() => {
+    fetchPosts();
+  }, []);
+
+  // If we're editing, fetch the post data
+  useEffect(() => {
+    if (editId) {
+      setIsEdit(true);
+      fetchPostForEdit(editId);
+    } else {
+      setIsEdit(false);
+      resetForm();
+    }
+  }, [editId]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value, type } = e.target;
@@ -387,7 +412,13 @@ export default function CreatePostPage() {
                           
                           {previewImage && (
                             <div className="image-preview mt-3">
-                              <img src={previewImage} alt="Preview" className="img-fluid" />
+                              <Image 
+                                src={previewImage} 
+                                alt="Preview" 
+                                width={300}
+                                height={200}
+                                className="img-fluid" 
+                              />
                             </div>
                           )}
                           
@@ -465,10 +496,16 @@ export default function CreatePostPage() {
                 
                 <div className="post-list">
                   {posts.length > 0 ? (
-                    posts.map((post: any) => (
+                    posts.map((post) => (
                       <div key={post._id} className="post-item">
                         <div className="post-item-image">
-                          <img src={`/${post.img}`} alt={post.title} className="img-fluid" />
+                          <Image 
+                            src={`/${post.img}`} 
+                            alt={post.title} 
+                            width={80}
+                            height={60}
+                            className="img-fluid" 
+                          />
                         </div>
                         <div className="post-item-content">
                           <h4>{post.title}</h4>

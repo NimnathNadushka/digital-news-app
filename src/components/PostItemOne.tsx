@@ -1,6 +1,7 @@
 import React from 'react';
 import './postItemOne.css';
 import Link from 'next/link';
+import Image from 'next/image'; // Add this import
 
 export default function PostItemOne({
   large,
@@ -21,7 +22,13 @@ export default function PostItemOne({
   return (
   <div className={`post-entry-1 ${large ? 'lg' : undefined}`}>
     <Link href={`/postitems/${item._id}`}>
-      <img src={`/${item.img}`} alt="" className="img-fluid" />
+      <Image 
+        src={`/${item.img}`} 
+        alt={item.title} 
+        width={large ? 600 : 400}
+        height={large ? 400 : 250}
+        className="img-fluid" 
+      />
     </Link>
     <div className="post-meta">
       <span className="date">{item.category}</span>
@@ -39,7 +46,13 @@ export default function PostItemOne({
 
         <div className="d-flex align-items-center author">
           <div className="photo">
-            <img src={item.avatar} alt="" className="img-fluid" />
+            <Image 
+              src={item.avatar} 
+              alt={item.author} 
+              width={40}
+              height={40}
+              className="img-fluid" 
+            />
           </div>
           <div className="name">
             <h3 className="m-0 p-0">{item.author}</h3>

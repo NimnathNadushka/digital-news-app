@@ -3,31 +3,33 @@
 import React, { useState, useEffect } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
+import Image from 'next/image'; // Add this import
 import Preloader from '@/components/Preloader';
 import './postitems.css';
+
+interface PostItem {
+  _id: string;
+  img: string;
+  category: string;
+  date: string;
+  title: string;
+  brief: string;
+  avatar: string;
+  author: string;
+  top?: boolean;
+  trending?: boolean;
+}
 
 export default function PostItemsPage() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const categoryFilter = searchParams.get('category');
   
-  const [posts, setPosts] = useState<any[]>([]);
+  const [posts, setPosts] = useState<PostItem[]>([]);
   const [loading, setLoading] = useState(true);
   const [categories, setCategories] = useState<string[]>([]);
 
   // Fetch all posts
-  useEffect(() => {
-    fetchPosts();
-  }, []);
-
-  // Extract categories whenever posts change
-  useEffect(() => {
-    if (posts.length > 0) {
-      const uniqueCategories = [...new Set(posts.map(post => post.category))];
-      setCategories(uniqueCategories);
-    }
-  }, [posts]);
-
   const fetchPosts = async () => {
     try {
       setLoading(true);
@@ -44,6 +46,18 @@ export default function PostItemsPage() {
       setLoading(false);
     }
   };
+
+  useEffect(() => {
+    fetchPosts();
+  }, []);
+
+  // Extract categories whenever posts change
+  useEffect(() => {
+    if (posts.length > 0) {
+      const uniqueCategories = [...new Set(posts.map(post => post.category))];
+      setCategories(uniqueCategories);
+    }
+  }, [posts]);
 
   // Filter posts by category if a category is selected
   const filteredPosts = categoryFilter 
@@ -149,9 +163,11 @@ export default function PostItemsPage() {
                     <div className="col-lg-7">
                       <div className="featured-image">
                         <Link href={`/postitems/${featuredPost._id}`}>
-                          <img 
+                          <Image 
                             src={`/${featuredPost.img}`} 
                             alt={featuredPost.title} 
+                            width={600}
+                            height={400}
                             className="img-fluid"
                           />
                           {featuredPost.top && (
@@ -173,7 +189,13 @@ export default function PostItemsPage() {
                         <div className="author-info">
                           {featuredPost.avatar && (
                             <div className="author-image">
-                              <img src={`/${featuredPost.avatar}`} alt={featuredPost.author || 'Author'} />
+                              <Image 
+                                src={`/${featuredPost.avatar}`} 
+                                alt={featuredPost.author || 'Author'} 
+                                width={40}
+                                height={40}
+                                className="img-fluid"
+                              />
                             </div>
                           )}
                           <div className="author-name">
@@ -196,9 +218,11 @@ export default function PostItemsPage() {
                     <div className="post-card h-100">
                       <div className="post-image">
                         <Link href={`/postitems/${post._id}`}>
-                          <img 
+                          <Image 
                             src={`/${post.img}`} 
                             alt={post.title} 
+                            width={400}
+                            height={240}
                             className="img-fluid" 
                           />
                           {post.trending && (
@@ -219,7 +243,13 @@ export default function PostItemsPage() {
                           <div className="author-info">
                             {post.avatar && (
                               <div className="author-image">
-                                <img src={`/${post.avatar}`} alt={post.author || 'Author'} />
+                                <Image 
+                                  src={`/${post.avatar}`} 
+                                  alt={post.author || 'Author'} 
+                                  width={40}
+                                  height={40}
+                                  className="img-fluid"
+                                />
                               </div>
                             )}
                             <div className="author-name">
